@@ -1,0 +1,69 @@
+.client-panel {
+    background: url('../../assets/background3.jpg') no-repeat center center/cover;
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 30px; /* Zwiększone wymiary tła tytułu */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-family: 'Dancing Script', cursive;
+    color: #6b4e31;
+}
+
+.reservation-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.reservation-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px;
+    text-align: center;
+}
+
+.reservation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.reservation-card h3 {
+    color: #6b4e31;
+    margin-bottom: 10px;
+}
+
+.reservation-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.no-reservations {
+    font-size: 1.2rem;
+    color: #6b4e31;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}

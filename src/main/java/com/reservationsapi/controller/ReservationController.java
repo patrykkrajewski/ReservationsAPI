@@ -105,9 +105,25 @@ public class ReservationController {
     }
 
     @GetMapping("/by-user/{userId}")
-    public List<Reservation> getReservationsByUserId(@PathVariable Long userId) {
-        return reservationRepository.findByUserId(userId);
+    public List<Map<String, Object>> getReservationsByUserId(@PathVariable Long userId) {
+        return reservationRepository.findByUserId(userId)
+                .stream()
+                .map(reservation -> {
+                    Map<String, Object> reservationData = new HashMap<>();
+                    reservationData.put("id", reservation.getId());
+                    reservationData.put("date", reservation.getDate());
+                    reservationData.put("status", reservation.getStatus() != null ? reservation.getStatus().getName() : "Brak statusu");
+                    reservationData.put("serviceName", reservation.getService() != null ? reservation.getService().getName() : "Nieokreślona usługa");
+                    reservationData.put("employeeName", reservation.getEmployeeId() != null ?
+                            userRepository.findById(reservation.getEmployeeId())
+                                    .map(User::getName)
+                                    .orElse("Nieznany pracownik")
+                            : "Nieznany pracownik");
+                    return reservationData;
+                })
+                .collect(Collectors.toList());
     }
+
 
     @GetMapping("/by-status/{statusId}")
     public List<Reservation> getReservationsByStatusId(@PathVariable Long statusId) {

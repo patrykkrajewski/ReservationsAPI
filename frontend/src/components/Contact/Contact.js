@@ -4,7 +4,9 @@ import './ContactPage.css';
 const ContactPage = () => {
     return (
         <div className="contact-page">
-            <h1 className="contact-title">Kontakt</h1>
+            <div className="contact-title-container">
+                <h1 className="contact-title">Kontakt</h1>
+            </div>
             <div className="contact-container">
                 <div className="contact-map">
                     <iframe
@@ -21,11 +23,16 @@ const ContactPage = () => {
                 <div className="contact-info">
                     <p><strong>Nails</strong></p>
                     <p>Morska 81/87<br />81-225 Gdynia</p>
-                    <p>Najlepszy kontakt z nami to telefon. Możesz także wysłać wiadomość e-mail na adres nails@spoko.pl. Pocztę sprawdzamy w każdy dzień roboczy.</p>
+                    <p>
+                        Najlepszy kontakt z nami to telefon. Możesz także wysłać wiadomość
+                        e-mail na adres <strong>nails@spoko.pl</strong>. Pocztę sprawdzamy w każdy dzień roboczy.
+                    </p>
                     <p><strong>📞 +48 740884001</strong></p>
-                    <p><strong>Pon. – Pią.: </strong>09:00 – 19:00<br />
+                    <p>
+                        <strong>Pon. – Pią.: </strong>09:00 – 19:00<br />
                         <strong>Sobota: </strong>09:00 – 15:00<br />
-                        <strong>Niedziela: </strong>Zamknięte</p>
+                        <strong>Niedziela: </strong>Zamknięte
+                    </p>
                 </div>
             </div>
         </div>

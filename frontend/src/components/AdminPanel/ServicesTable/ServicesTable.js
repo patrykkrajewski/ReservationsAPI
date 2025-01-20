@@ -9,15 +9,16 @@ function ServicesTable({ onRefresh }) {
     const [showEditPopup, setShowEditPopup] = useState(false);
     const [showAddPopup, setShowAddPopup] = useState(false);
     const [selectedService, setSelectedService] = useState(null);
+    const [refreshTrigger, setRefreshTrigger] = useState(0); // Trigger for refreshing data
 
     useEffect(() => {
         fetchServices();
-    }, []);
+    }, [refreshTrigger]); // Re-fetch services when refreshTrigger changes
 
     const fetchServices = async () => {
         try {
             const response = await axios.get('http://localhost:8080/api/services');
-            setServices(response.data);
+            setServices(response.data); // Update services list
             if (onRefresh) onRefresh();
         } catch (error) {
             console.error('Błąd podczas pobierania usług:', error);
@@ -31,7 +32,7 @@ function ServicesTable({ onRefresh }) {
     const handleAddSubmit = async (newService) => {
         try {
             await axios.post('http://localhost:8080/api/services', newService);
-            fetchServices();
+            setRefreshTrigger(refreshTrigger + 1); // Trigger refresh
             setShowAddPopup(false);
         } catch (error) {
             console.error('Błąd podczas dodawania usługi:', error);
@@ -46,7 +47,7 @@ function ServicesTable({ onRefresh }) {
     const handleEditSubmit = async (updatedService) => {
         try {
             await axios.put(`http://localhost:8080/api/services/${updatedService.id}`, updatedService);
-            fetchServices();
+            setRefreshTrigger(refreshTrigger + 1); // Trigger refresh
             setShowEditPopup(false);
         } catch (error) {
             console.error('Błąd podczas edytowania usługi:', error);
@@ -57,7 +58,7 @@ function ServicesTable({ onRefresh }) {
         if (window.confirm('Czy na pewno chcesz usunąć tę usługę?')) {
             try {
                 await axios.delete(`http://localhost:8080/api/services/${serviceId}`);
-                fetchServices();
+                setRefreshTrigger(refreshTrigger + 1); // Trigger refresh
             } catch (error) {
                 console.error('Błąd podczas usuwania usługi:', error);
             }
@@ -66,6 +67,12 @@ function ServicesTable({ onRefresh }) {
 
     return (
         <div className="services-table-container">
+            <div className="services-table-header">
+                <h2>Lista Usług</h2>
+                <button className="add-button" onClick={handleAddClick}>
+                    Dodaj Usługę
+                </button>
+            </div>
             <table className="services-table">
                 <thead>
                 <tr>
@@ -103,6 +110,17 @@ function ServicesTable({ onRefresh }) {
                 ))}
                 </tbody>
             </table>
+
+            {showAddPopup && (
+                <AddServicePopup
+                    onClose={(refresh) => {
+                        setShowAddPopup(false);
+                        if (refresh) setRefreshTrigger(refreshTrigger + 1); // Trigger refresh
+                    }}
+                    onSubmit={handleAddSubmit}
+                />
+            )}
+
             {showEditPopup && selectedService && (
                 <EditServicePopup
                     service={selectedService}

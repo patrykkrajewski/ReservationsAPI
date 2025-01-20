@@ -7,9 +7,10 @@ import Contact from '../components/Contact/Contact';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { UserContext } from '../components/UserContext';
+import ClientPanel from "../components/ClientPanel/ClientPanel";
 
 function HomePage() {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return (
         <div>
@@ -17,15 +18,25 @@ function HomePage() {
             <div id="home">
                 <MainBanner />
             </div>
-            <div id="admin">
-                <AdminPanel />
-            </div>
-            <div id="employees">
-                <EmployeePanel />
-            </div>
+            {user && user.role === 'Admin' && (
+                <div id="admin">
+                    <AdminPanel />
+                </div>
+            )}
+            {user && (user.role === 'Admin' || user.role === 'Pracownik') && (
+                <div id="employees">
+                    <EmployeePanel />
+                </div>
+            )}
             <div id="reservations">
                 <Reservations />
             </div>
+            {user && (user.role === 'Admin' || user.role === 'Klient') && (
+                <div id="client">
+                <ClientPanel />
+            </div>
+            )}
+
             <div id="contact">
                 <Contact />
             </div>

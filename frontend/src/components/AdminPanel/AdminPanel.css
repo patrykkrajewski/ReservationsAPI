@@ -6,17 +6,25 @@
     min-height: 100vh;
     color: black;
     font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-title-container {
+    margin-top: 90px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 30px; /* Tło tytułu nie na całą szerokość */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .admin-title {
     font-size: 2.5rem;
     font-family: 'Dancing Script', cursive;
     color: #6b4e31;
-    margin-bottom: 30px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 10px 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .admin-tables-container {
@@ -25,6 +33,7 @@
     grid-gap: 20px;
     justify-items: stretch;
     align-items: start;
+    width: 100%;
 }
 
 .table-container {

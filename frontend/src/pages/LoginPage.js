@@ -23,8 +23,20 @@ function LoginPage() {
             const data = await response.json();
 
             if (response.ok) {
-                setUser({ id: data.userId, username: data.username }); // Ustaw użytkownika w kontekście
-                navigate('/'); // Przekierowanie na stronę główną
+                // Save userId to localStorage
+                localStorage.setItem('userId', data.userId);
+
+                // Set the user in context
+                setUser({
+                    id: data.userId,
+                    username: data.username,
+                });
+
+                // Redirect and refresh the page
+                navigate('/');
+                setTimeout(() => {
+                    window.location.reload(); // Refresh the page after navigation
+                }, 100); // Small delay to ensure navigation happens before refresh
             } else {
                 setError(data.message || 'Nieprawidłowe dane logowania');
             }

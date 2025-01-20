@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import StatusesTable from './StatusTable/StatusesTable';
 import UsersTable from './UserTable/UsersTable';
 import './AdminPanel.css';
@@ -9,8 +10,12 @@ import AddUserPopup from './UserTable/AddUserPopup';
 import AddServicePopup from './ServicesTable/AddServicePopup';
 import AddEmployeePopup from './EmployeeTable/AddEmployeePopup';
 import axios from 'axios';
+import { UserContext } from '../UserContext'; // Import UserContext
 
 function AdminPanel() {
+    const { user } = useContext(UserContext); // Consume the user context
+    const navigate = useNavigate();
+
     const [isStatusPopupOpen, setIsStatusPopupOpen] = useState(false);
     const [isAddUserPopupOpen, setIsAddUserPopupOpen] = useState(false);
     const [isAddServicePopupOpen, setIsAddServicePopupOpen] = useState(false);
@@ -19,9 +24,14 @@ function AdminPanel() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetchStatuses();
-        fetchUsers();
-    }, []);
+        // Redirect if the user is not logged in or not an admin
+        if (!user || user.role !== 'Admin') {
+            navigate('/'); // Redirect to home page
+        } else {
+            fetchStatuses();
+            fetchUsers();
+        }
+    }, [user, navigate]);
 
     const fetchStatuses = async () => {
         try {
@@ -118,7 +128,9 @@ function AdminPanel() {
 
     return (
         <div className="admin-page">
-            <h1 className="admin-title">Panel Admina</h1>
+            <div className="admin-title-container">
+                <h1 className="admin-title">Panel Admina</h1>
+            </div>
             <div className="admin-tables-container">
                 <div className="table-container">
                     <div className="table-header">Statusy</div>
