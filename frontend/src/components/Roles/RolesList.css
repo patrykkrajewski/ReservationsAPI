@@ -1,0 +1,14 @@
+.roles-list {
+    padding: 20px;
+    text-align: center;
+}
+
+.roles-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.roles-list li {
+    margin: 10px 0;
+    font-size: 18px;
+}

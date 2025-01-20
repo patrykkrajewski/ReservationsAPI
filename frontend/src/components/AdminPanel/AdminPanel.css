@@ -1,0 +1,72 @@
+.admin-page {
+    padding: 40px;
+    background-image: url('../../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.admin-title {
+    font-size: 2.5rem;
+    font-family: 'Dancing Script', cursive;
+    color: #6b4e31;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.admin-tables-container {
+    display: grid;
+    grid-template-columns: 1.9fr 2.1fr;
+    grid-gap: 20px;
+    justify-items: stretch;
+    align-items: start;
+}
+
+.table-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    min-width: 300px;
+}
+
+.table-header {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.table-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-button {
+    background-color: #027a02;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 15px 20px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.add-button:hover {
+    background-color: #025d02;
+}
+
+@media (max-width: 768px) {
+    .admin-tables-container {
+        grid-template-columns: 1fr;
+    }
+}

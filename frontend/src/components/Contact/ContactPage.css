@@ -1,0 +1,64 @@
+.contact-page {
+    padding: 40px 20px;
+    background-image: url('../../assets/background2.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: black;
+    font-family: 'Arial', sans-serif;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-family: 'Dancing Script', cursive;
+    color: #6b4e31;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+.contact-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.contact-map {
+    flex: 1;
+    min-width: 400px;
+    height: 450px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+.contact-info strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.contact-info svg {
+    margin-right: 10px;
+}

@@ -1,0 +1,201 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 70%;
+    max-width: 1200px;
+    min-width: 600px;
+    animation: popupAnimation 0.3s ease-out;
+    max-height: 90%; /* Prevent content overflow */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+@keyframes popupAnimation {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.popup-content h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #6b4e31;
+    margin-bottom: 30px;
+}
+
+.confirm-button {
+    margin-top: 20px;
+    padding: 15px 40px;
+    background-color: #027a02;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.confirm-button:hover {
+    background-color: #025d02;
+    transform: scale(1.05);
+}
+
+.close-popup {
+    margin-top: 20px;
+    padding: 15px 40px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-popup:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);
+}
+
+/* Employee and time lists */
+.employee-list,
+.time-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-height: 300px; /* Set a height limit for scrollable list */
+    overflow-y: auto; /* Add scrollbar if content exceeds height */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Styling individual items */
+.employee-item,
+.time-item {
+    flex: 0 1 calc(25% - 10px); /* Four items per row */
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.employee-item:hover,
+.time-item:hover {
+    background-color: rgba(255, 223, 186, 0.7);
+    transform: scale(1.05);
+}
+
+/* Calendar styling */
+.react-calendar {
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Quicksand', sans-serif;
+    background: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.react-calendar__tile {
+    border-radius: 50%;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    color: #333;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.react-calendar__tile:hover {
+    background-color: rgba(255, 223, 186, 0.7);
+    transform: scale(1.1);
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile--active {
+    background-color: #6b4e31;
+    color: white;
+    font-weight: bold;
+    transform: scale(1.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.react-calendar__tile--now {
+    background-color: rgba(255, 235, 200, 0.9);
+    border: 2px solid #6b4e31;
+    color: #333;
+}
+
+.react-calendar__month-view__weekdays {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #6b4e31;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.react-calendar__navigation button {
+    color: #6b4e31;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.react-calendar__navigation button:hover {
+    color: #4e3623;
+}
+
+.react-calendar__navigation span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #6b4e31;
+}
+
+.disabled-tile {
+    background-color: #f0f0f0 !important;
+    color: #bbb !important;
+    pointer-events: none;
+    border-radius: 50%;
+}

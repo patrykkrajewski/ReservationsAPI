@@ -1,0 +1,183 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 45px;
+    font-weight: 600;
+    color: white;
+    margin-left: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-links.open {
+    transform: translateX(0);
+}
+
+.nav-links button {
+    background: none;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Dancing Script', cursive;
+    cursor: pointer;
+}
+
+.nav-links button:hover {
+    text-decoration: underline;
+}
+
+.buttons-container {
+    margin-right: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.login-button,
+.logout-button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s ease-in-out;
+    text-align: center;
+    width: 120px;
+}
+
+.login-button {
+    background-color: #027a02;
+    color: white;
+}
+
+.login-button:hover {
+    background-color: #025d02;
+}
+
+.logout-button.logged-in {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 10px;
+    white-space: nowrap;
+    font-size: 18px;
+}
+
+.logout-button.logged-in:hover {
+    background-color: #c9302c;
+}
+
+.hamburger {
+    display: none;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.popup-content h3 {
+    margin-bottom: 15px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.popup-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.popup-buttons .confirm-button {
+    background-color: #027a02;
+    color: white;
+}
+
+.popup-buttons .confirm-button:hover {
+    background-color: #025d02;
+}
+
+.popup-buttons .cancel-button {
+    background-color: #d9534f;
+    color: white;
+}
+
+.popup-buttons .cancel-button:hover {
+    background-color: #c9302c;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: block;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        width: 200px;
+        transform: translateX(100%);
+    }
+
+    .nav-links button {
+        display: block;
+        padding: 10px;
+        text-align: right;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
