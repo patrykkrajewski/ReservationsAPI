@@ -11,7 +11,7 @@ function EditEmployeePopup({ employee, onClose, onSubmit }) {
             alert('Wszystkie pola są wymagane!');
             return;
         }
-        onSubmit({ id: employee.id, name, email, roleId: 2 }); // Rola Pracownik (roleId = 2)
+        onSubmit({ id: employee.id, name, email, roleId: 2 });
     };
 
     return (

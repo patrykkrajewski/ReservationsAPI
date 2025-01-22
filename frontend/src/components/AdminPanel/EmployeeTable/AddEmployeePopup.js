@@ -12,7 +12,7 @@ function AddEmployeePopup({ onClose, onSubmit }) {
             alert('Wszystkie pola są wymagane!');
             return;
         }
-        onSubmit({ name, email, password, roleId: 2 }); // Rola Pracownik (roleId = 2)
+        onSubmit({ name, email, password, roleId: 2 });
     };
 
     return (

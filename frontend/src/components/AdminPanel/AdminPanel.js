@@ -13,7 +13,7 @@ import axios from 'axios';
 import { UserContext } from '../UserContext'; // Import UserContext
 
 function AdminPanel() {
-    const { user } = useContext(UserContext); // Consume the user context
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [isStatusPopupOpen, setIsStatusPopupOpen] = useState(false);
@@ -24,9 +24,8 @@ function AdminPanel() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        // Redirect if the user is not logged in or not an admin
         if (!user || user.role !== 'Admin') {
-            navigate('/'); // Redirect to home page
+            navigate('/');
         } else {
             fetchStatuses();
             fetchUsers();

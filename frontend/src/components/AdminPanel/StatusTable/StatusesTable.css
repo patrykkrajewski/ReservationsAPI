@@ -9,12 +9,12 @@
 }
 
 .table-wrapper {
-    background-color: rgba(255, 255, 255, 0.9); /* Białe tło */
-    border-radius: 10px; /* Zaokrąglone rogi */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Cień */
-    padding: 20px; /* Odstęp wewnętrzny */
-    max-height: 310px; /* Maksymalna wysokość */
-    overflow-y: auto; /* Przewijanie pionowe */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-height: 310px;
+    overflow-y: auto;
 }
 
 .statuses-table {

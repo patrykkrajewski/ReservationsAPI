@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f7f7f7;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -133,7 +139,6 @@
 }
 
 .popup-buttons button {
-    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -145,6 +150,7 @@
 .popup-buttons .confirm-button {
     background-color: #027a02;
     color: white;
+    margin: 0;
 }
 
 .popup-buttons .confirm-button:hover {
@@ -154,6 +160,7 @@
 .popup-buttons .cancel-button {
     background-color: #d9534f;
     color: white;
+    width: 15%;
 }
 
 .popup-buttons .cancel-button:hover {

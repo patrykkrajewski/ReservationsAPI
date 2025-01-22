@@ -44,7 +44,29 @@ public class ReservationController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(404).build());
     }
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateReservationStatus(
+            @PathVariable Long id,
+            @RequestBody Map<String, Long> payload) {
+        System.out.println("Received request to update status for reservation ID: " + id);
+        System.out.println("Payload: " + payload);
 
+        Optional<Reservation> reservationOptional = reservationRepository.findById(id);
+        if (reservationOptional.isPresent()) {
+            Reservation reservation = reservationOptional.get();
+            Long statusId = payload.get("statusId");
+            if (statusId != null) {
+                reservation.setStatusId(statusId);
+                reservation.setUpdatedAt(LocalDateTime.now());
+                reservationRepository.save(reservation);
+                return ResponseEntity.ok("Status updated successfully");
+            } else {
+                return ResponseEntity.badRequest().body("statusId is required");
+            }
+        } else {
+            return ResponseEntity.status(404).body("Reservation not found");
+        }
+    }
     @PostMapping
     public ResponseEntity<?> createReservation(@RequestBody Reservation reservation) {
         if (reservation.getUserId() == null) {
@@ -217,7 +239,6 @@ public class ReservationController {
 
     @GetMapping("/available-employees/{date}")
     public List<User> getAvailableEmployees(@PathVariable String date) {
-        // Fetch all employees with role_id = 2
         return userRepository.findByRoleId(2L);
     }
 }

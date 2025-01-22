@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './EmployeePanel.css';
-import { UserContext } from '../UserContext'; // Import UserContext
+import { UserContext } from '../UserContext';
 
 function EmployeePanel() {
     const { user } = useContext(UserContext); // Fetch logged-in employee data
@@ -68,17 +68,19 @@ function EmployeePanel() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ statusId: newStatusId }),
+                    body: JSON.stringify({ statusId: parseInt(newStatusId) }), // Ensure statusId is a number
                 }
             );
 
             if (response.ok) {
-                const updatedReservation = await response.json();
-                // Update reservations list locally
                 setReservations((prevReservations) =>
                     prevReservations.map((reservation) =>
                         reservation.id === reservationId
-                            ? { ...reservation, status: updatedReservation.status }
+                            ? {
+                                ...reservation,
+                                status: statuses.find((s) => s.id === parseInt(newStatusId))?.name,
+                                statusColor: statuses.find((s) => s.id === parseInt(newStatusId))?.color,
+                            }
                             : reservation
                     )
                 );
@@ -120,34 +122,41 @@ function EmployeePanel() {
                                 })}
                             </p>
                             <p>Klient: {reservation.userName || 'Nieznany klient'}</p>
-                            <p>Status: {reservation.status || 'Brak statusu'}</p>
                             <div className="status-update">
                                 <select
+                                    className="status-select"
                                     onChange={(e) =>
                                         handleStatusChange(reservation.id, e.target.value)
                                     }
-                                    defaultValue=""
+                                    value={
+                                        statuses.find(
+                                            (status) => status.name === reservation.status
+                                        )?.id || ''
+                                    }
+                                    style={{
+                                        backgroundColor:
+                                            statuses.find(
+                                                (status) => status.name === reservation.status
+                                            )?.color || '#fff',
+                                        color: '#fff',
+                                    }}
                                 >
                                     <option value="" disabled>
                                         Wybierz status
                                     </option>
                                     {statuses.map((status) => (
-                                        <option key={status.id} value={status.id}>
+                                        <option
+                                            key={status.id}
+                                            value={status.id}
+                                            style={{
+                                                backgroundColor: status.color,
+                                                color: '#fff',
+                                            }}
+                                        >
                                             {status.name}
                                         </option>
                                     ))}
                                 </select>
-                                <button
-                                    onClick={() =>
-                                        handleStatusChange(
-                                            reservation.id,
-                                            reservation.statusId
-                                        )
-                                    }
-                                    className="status-update-button"
-                                >
-                                    Zmień status
-                                </button>
                             </div>
                         </div>
                     ))

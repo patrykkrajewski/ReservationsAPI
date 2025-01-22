@@ -1,0 +1,136 @@
+.employee-table-container {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.employee-table-container h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.employee-table-wrapper {
+    max-height: 280px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.employee-table-wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+
+.employee-table-wrapper::-webkit-scrollbar-track {
+    background: #f4f4f4;
+    border-radius: 10px;
+}
+
+.employee-table-wrapper::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 10px;
+}
+
+.employee-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.employee-table thead {
+    background-color: #f4f4f4;
+    color: black;
+}
+
+.employee-table th,
+.employee-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+.employee-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.employee-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.edit-button,
+.delete-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.edit-button {
+    background-color: #027a02;
+}
+
+.edit-button:hover {
+    background-color: #025d02;
+}
+
+.delete-button {
+    background-color: #d9534f;
+}
+
+.delete-button:hover {
+    background-color: #b71c1c;
+}
+
+.loading {
+    text-align: center;
+    font-size: 18px;
+    color: #027a02;
+}
+
+.no-employees {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+}
+
+@media (max-width: 768px) {
+    .employee-table-container {
+        padding: 10px;
+    }
+
+    .employee-table-container h2 {
+        font-size: 20px;
+    }
+
+    .edit-button,
+    .delete-button {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .employee-table {
+        font-size: 14px;
+    }
+
+    .employee-table-container h2 {
+        font-size: 18px;
+    }
+}

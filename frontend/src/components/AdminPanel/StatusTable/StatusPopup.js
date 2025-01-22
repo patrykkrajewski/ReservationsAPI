@@ -23,7 +23,7 @@ function StatusPopup({ onClose, status }) {
             .then((response) => {
                 if (response.ok) {
                     alert(status ? 'Status zaktualizowany!' : 'Status dodany!');
-                    onClose(true); // Zamknij popup i odśwież tabelę
+                    onClose(true);
                 } else {
                     alert('Wystąpił błąd podczas zapisywania statusu.');
                 }

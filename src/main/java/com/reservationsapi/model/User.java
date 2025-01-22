@@ -30,9 +30,8 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Metoda do zwracania pełnego imienia i nazwiska
     public String getFullName() {
-        return name; // Jeśli `name` zawiera pełne imię, pozostawiamy to. Można rozszerzyć logikę w razie potrzeby.
+        return name;
     }
 
     public Long getId() {

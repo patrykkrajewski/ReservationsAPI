@@ -35,7 +35,7 @@ function Popup({ service, onClose }) {
             });
             if (response.ok) {
                 const data = await response.json();
-                setEmployees(data); // Always show full employee list
+                setEmployees(data);
             } else {
                 console.error('Error fetching employees:', response.statusText);
             }
@@ -53,8 +53,8 @@ function Popup({ service, onClose }) {
             if (response.ok) {
                 const data = await response.json();
                 const filteredTimes = data
-                    .filter((time) => time !== '16:00:00') // Remove 16:00 from the available times
-                    .map((time) => time.slice(0, 5)); // Remove seconds from time (HH:mm:ss -> HH:mm)
+                    .filter((time) => time !== '16:00:00')
+                    .map((time) => time.slice(0, 5));
                 setAvailableTimes(filteredTimes);
                 setStep(3);
             } else {
@@ -126,7 +126,7 @@ function Popup({ service, onClose }) {
             <div className="popup-content">
                 {step === 1 && (
                     <>
-                        <h2>Select a date for the service: {service.name}</h2>
+                        <h2>Dostępne godziny pracownika: {service.name}</h2>
                         <Calendar
                             onChange={handleDateChange}
                             minDate={new Date()}
@@ -136,7 +136,7 @@ function Popup({ service, onClose }) {
                 )}
                 {step === 2 && (
                     <>
-                        <h2>Select an employee for the date: {selectedDate.toLocaleDateString('pl-PL')}</h2>
+                        <h2>Dostępne godziny pracownika: {selectedDate.toLocaleDateString('pl-PL')}</h2>
                         <div className="employee-list">
                             {employees.map((employee) => (
                                 <div
@@ -152,7 +152,7 @@ function Popup({ service, onClose }) {
                 )}
                 {step === 3 && (
                     <>
-                        <h2>Select a time for the employee: {selectedEmployee.name}</h2>
+                        <h2>Dostępne godziny pracownika:: {selectedEmployee.name}</h2>
                         <div className="time-list">
                             {availableTimes.map((time, index) => (
                                 <div
@@ -168,18 +168,18 @@ function Popup({ service, onClose }) {
                 )}
                 {step === 4 && (
                     <>
-                        <h2>Confirm Your Reservation</h2>
-                        <p>Service: <strong>{service.name}</strong></p>
-                        <p>Employee: <strong>{selectedEmployee.name}</strong></p>
-                        <p>Date: <strong>{selectedDate.toLocaleDateString('pl-PL')}</strong></p>
-                        <p>Time: <strong>{selectedTime}</strong></p>
+                        <h2>Potwierdzenie rezerwacji</h2>
+                        <p>Usługa: <strong>{service.name}</strong></p>
+                        <p>Pracownik: <strong>{selectedEmployee.name}</strong></p>
+                        <p>Data: <strong>{selectedDate.toLocaleDateString('pl-PL')}</strong></p>
+                        <p>Godzina: <strong>{selectedTime}</strong></p>
                         <button className="confirm-button" onClick={handleReservation}>
-                            Reserve
+                            Rezerwuj
                         </button>
                     </>
                 )}
                 <button className="close-popup" onClick={onClose}>
-                    Cancel
+                    Anuluj
                 </button>
             </div>
         </div>

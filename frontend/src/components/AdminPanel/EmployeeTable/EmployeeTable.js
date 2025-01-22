@@ -1,111 +1,136 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import EditEmployeePopup from './EditEmployeePopup';
 import './EmployeeTable.css';
 
 function EmployeeTable() {
-    const [reservations, setReservations] = useState([]);
-    const [statuses, setStatuses] = useState([]);
-    const [availableSlots, setAvailableSlots] = useState([]);
+    const [employees, setEmployees] = useState([]);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [editingEmployee, setEditingEmployee] = useState(null);
+    const [refreshTrigger, setRefreshTrigger] = useState(0); // To trigger re-fetching of employees
 
     useEffect(() => {
-        fetchReservations();
-        fetchStatuses();
-        fetchAvailableSlots();
-    }, []);
+        fetchEmployees();
+    }, [refreshTrigger]);
 
-    const fetchReservations = async () => {
+    const fetchEmployees = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/reservations');
-            setReservations(response.data);
+            const response = await fetch('http://localhost:8080/api/users/employees');
+            if (response.ok) {
+                const data = await response.json();
+                setEmployees(data);
+            } else {
+                console.error('Failed to fetch employees:', response.statusText);
+            }
         } catch (error) {
-            console.error('Error fetching reservations:', error);
+            console.error('Error fetching employees:', error);
         }
     };
 
-    const fetchStatuses = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/api/statuses');
-            setStatuses(response.data);
-        } catch (error) {
-            console.error('Error fetching statuses:', error);
+    const handleDelete = async (employeeId) => {
+        if (window.confirm('Czy na pewno chcesz usunąć tego pracownika?')) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/users/${employeeId}`, {
+                    method: 'DELETE',
+                });
+                if (response.ok) {
+                    alert('Pracownik został pomyślnie usunięty.');
+                    setRefreshTrigger(refreshTrigger + 1);
+                } else {
+                    alert('Wystąpił problem podczas usuwania pracownika.');
+                }
+            } catch (error) {
+                console.error('Error deleting employee:', error);
+            }
         }
     };
 
-    const fetchAvailableSlots = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/api/available-slots');
-            setAvailableSlots(response.data);
-        } catch (error) {
-            console.error('Error fetching available slots:', error);
+    const handleEdit = (employee) => {
+        setEditingEmployee(employee);
+        setIsPopupOpen(true);
+    };
+
+    const handlePopupClose = (refresh = false) => {
+        setIsPopupOpen(false);
+        setEditingEmployee(null);
+        if (refresh) {
+            setRefreshTrigger(refreshTrigger + 1);
         }
     };
 
-    const handleStatusChange = async (reservationId, newStatusId) => {
+    const handleEditSubmit = async (updatedEmployee) => {
         try {
-            await axios.put(`http://localhost:8080/api/reservations/${reservationId}/status`, {
-                statusId: newStatusId,
-            });
-            fetchReservations(); // Refresh reservations after updating status
+            const response = await fetch(
+                `http://localhost:8080/api/users/${updatedEmployee.id}`,
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedEmployee),
+                }
+            );
+            if (response.ok) {
+                alert('Pracownik został pomyślnie zaktualizowany.');
+                handlePopupClose(true);
+            } else {
+                alert('Wystąpił problem podczas aktualizacji pracownika.');
+            }
         } catch (error) {
-            console.error('Error updating reservation status:', error);
+            console.error('Error updating employee:', error);
         }
     };
 
     return (
-        <div className="employee-panel-container">
-            <div className="panel-header">
-                <button className="nav-button">Poprzedni dzień</button>
-                <div className="panel-date">20.01.2025</div>
-                <button className="nav-button">Następny dzień</button>
-            </div>
-
-            <div className="reservations-grid">
-                {reservations.map((reservation) => (
-                    <div className="reservation-card" key={reservation.id}>
-                        <h3>Usługcca: {reservation.serviceName}</h3>
-                        <p>Godzina: {reservation.time}</p>
-                        <p>Klient: {reservation.clientName}</p>
-                        <p>
-                            Statusff:
-                            <select
-                                className="status-select"
-                                value={reservation.statusId}
-                                onChange={(e) =>
-                                    handleStatusChange(reservation.id, Number(e.target.value))
-                                }
-                                style={{
-                                    backgroundColor:
-                                        statuses.find((status) => status.id === Number(e.target.value))
-                                            ?.color || 'transparent',
-                                    color: '#fff',
-                                }}
-                            >
-                                {statuses.map((status) => (
-                                    <option key={status.id} value={status.id}>
-                                        {status.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </p>
-                    </div>
-                ))}
-            </div>
-
-            <div className="available-slots">
-                <h3>Dostępne godziny</h3>
-                <div className="slots-grid">
-                    {availableSlots.map((slot) => (
-                        <div
-                            key={slot.id}
-                            className={`slot ${slot.isBooked ? 'booked' : 'available'}`}
-                        >
-                            {slot.isBooked ? 'Zajęte' : 'Brak'}
-                        </div>
+        <div className="employee-table-container">
+            <div className="employee-table-wrapper">
+                <table className="employee-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imię i nazwisko</th>
+                        <th>Email</th>
+                        <th>Rola</th>
+                        <th>Data Stw.</th>
+                        <th>Akcje</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {employees.map((employee) => (
+                        <tr key={employee.id}>
+                            <td>{employee.id}</td>
+                            <td>{employee.name}</td>
+                            <td>{employee.email}</td>
+                            <td>{employee.role || 'Pracownik'}</td>
+                            <td>{employee.createdAt}</td>
+                            <td>
+                            <button
+                                    className="edit-button"
+                                    onClick={() => handleEdit(employee)}
+                                >
+                                    Edytuj
+                                </button>
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handleDelete(employee.id)}
+                                >
+                                    Usuń
+                                </button>
+                            </td>
+                        </tr>
                     ))}
-                </div>
+                    </tbody>
+                </table>
             </div>
+
+            {isPopupOpen && (
+                <EditEmployeePopup
+                    employee={editingEmployee}
+                    onClose={handlePopupClose}
+                    onSubmit={handleEditSubmit}
+                />
+            )}
         </div>
     );
+
+
 }
 
 export default EmployeeTable;

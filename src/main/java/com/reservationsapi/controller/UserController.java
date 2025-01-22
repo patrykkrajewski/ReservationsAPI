@@ -65,17 +65,12 @@ public class UserController {
     @GetMapping("/admins")
     public ResponseEntity<?> getAllAdmins(@RequestParam(value = "userId", required = false) Long userId) {
         if (userId != null) {
-            // Search for a specific user by userId
             Optional<User> userOptional = userRepository.findById(userId);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-
-                // Retrieve the role name from the roles table
                 String roleName = roleRepository.findById(user.getRoleId())
                         .map(role -> role.getName())
                         .orElse("Nieznany");
-
-                // Check if the user is an admin
                 if (user.getRoleId() == 1) {
                     UserResponse userResponse = new UserResponse(
                             user.getId(),
@@ -86,7 +81,6 @@ public class UserController {
                     );
                     return ResponseEntity.ok(userResponse);
                 } else {
-                    // Return the user's role if they are not an admin
                     return ResponseEntity.ok(Map.of(
                             "id", user.getId(),
                             "name", user.getName(),
@@ -100,7 +94,6 @@ public class UserController {
                         .body(Map.of("message", "Nie znaleziono użytkownika o podanym ID"));
             }
         } else {
-            // Retrieve all admins
             List<UserResponse> admins = userRepository.findAll().stream()
                     .filter(user -> user.getRoleId() == 1) // Filter users with roleId == 1 (Admin)
                     .map(user -> {

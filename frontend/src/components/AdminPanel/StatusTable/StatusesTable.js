@@ -6,11 +6,11 @@ function StatusesTable({ onAddStatus }) {
     const [statuses, setStatuses] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [editingStatus, setEditingStatus] = useState(null);
-    const [refreshTrigger, setRefreshTrigger] = useState(0); // Trigger for refreshing statuses
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     useEffect(() => {
         fetchStatuses();
-    }, [refreshTrigger]); // Re-fetch whenever refreshTrigger changes
+    }, [refreshTrigger]);
 
     const fetchStatuses = () => {
         fetch('http://localhost:8080/api/statuses')
@@ -25,7 +25,7 @@ function StatusesTable({ onAddStatus }) {
                 method: 'DELETE',
             })
                 .then(() => {
-                    setRefreshTrigger(refreshTrigger + 1); // Trigger refresh
+                    setRefreshTrigger(refreshTrigger + 1);
                 })
                 .catch((error) => console.error('Error deleting status:', error));
         }
@@ -39,7 +39,7 @@ function StatusesTable({ onAddStatus }) {
     const handlePopupClose = (refresh = false) => {
         setIsPopupOpen(false);
         if (refresh) {
-            setRefreshTrigger(refreshTrigger + 1); // Trigger refresh
+            setRefreshTrigger(refreshTrigger + 1);
         }
     };
 

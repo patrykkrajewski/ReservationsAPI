@@ -67,12 +67,6 @@ function ServicesTable({ onRefresh }) {
 
     return (
         <div className="services-table-container">
-            <div className="services-table-header">
-                <h2>Lista Usług</h2>
-                <button className="add-button" onClick={handleAddClick}>
-                    Dodaj Usługę
-                </button>
-            </div>
             <table className="services-table">
                 <thead>
                 <tr>

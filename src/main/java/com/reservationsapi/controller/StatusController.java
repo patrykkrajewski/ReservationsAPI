@@ -33,7 +33,6 @@ public class StatusController {
 
     @PostMapping
     public ResponseEntity<Status> createStatus(@RequestBody Status status) {
-        // Ensure timestamps are set when creating a new status
         status.setCreatedAt(LocalDateTime.now());
         status.setUpdatedAt(LocalDateTime.now());
         Status savedStatus = statusRepository.save(status);
